@@ -13,6 +13,10 @@ class Expenses(models.Model):
     date = models.DateField(default=None,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Expense'
+        verbose_name_plural = 'Expenses'
+
     def __str__(self):
         return self.title
 

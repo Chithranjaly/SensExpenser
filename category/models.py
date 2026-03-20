@@ -9,6 +9,8 @@ class Category(models.Model):
     description = models.TextField(max_length=400, blank=True)
 
     class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
         constraints = [
             models.UniqueConstraint(
                 fields=["user","category_name"],
@@ -18,4 +20,3 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.category_name} ({self.user.username})"
 
-# doubt regarding adding category to filter out, in serializer!!!!
