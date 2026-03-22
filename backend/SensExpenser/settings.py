@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'category',
     'expenses',
     'django_filters',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -126,7 +128,7 @@ STATIC_URL = 'static/'
 
 REST_FRAMEWORK  = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'accounts.authentication.CookieJWTAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 4,
@@ -141,3 +143,21 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=300),
     'REFRESH_TOKEN_LIFETIME' : timedelta(days=1),
 }
+
+# cookie settings
+AUTH_COOKIE = "access_token"
+REFRESH_COOKIE = "refresh_token"
+
+AUTH_COOKIE_SECURE = False
+AUTH_COOKIE_HTTP_ONLY = True
+AUTH_COOKIE_SAMESITE = "Lax"
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+]

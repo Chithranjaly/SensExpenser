@@ -3,3 +3,4 @@ djangorestframework
 environs
 djangorestframework-simplejwt
 django-filter
+django-cors-headers
