@@ -148,9 +148,9 @@ SIMPLE_JWT = {
 AUTH_COOKIE = "access_token"
 REFRESH_COOKIE = "refresh_token"
 
-AUTH_COOKIE_SECURE = False
+AUTH_COOKIE_SECURE = False #make true in production
 AUTH_COOKIE_HTTP_ONLY = True
-AUTH_COOKIE_SAMESITE = "Lax"
+AUTH_COOKIE_SAMESITE = "Lax"  #(Strict, Lax, None)
 
 CORS_ALLOW_CREDENTIALS = True
 
