@@ -1,16 +1,18 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Login() {
   const { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
 
   const [error, setError] = useState("");
 
@@ -22,19 +24,20 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     setError("");
-    console.log(formData);
-
 
     try {
-        await loginUser(formData);
-        navigate("/"); // 🔥 redirect to home
+      await loginUser(formData);
+
+      // ✅ Redirect properly
+      navigate(from, { replace: true });
+
     } catch (err) {
-        setError("Invalid credentials");
+      setError("Invalid credentials");
     }
-};
+  };
+
   return (
     <div style={{ maxWidth: "400px", margin: "50px auto" }}>
       <h2>Login</h2>

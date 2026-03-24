@@ -3,31 +3,36 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
 import Login from "./components/auth/Login";
+import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 
 function App() {
   const { isAuthenticated, loading } = useContext(AuthContext);
 
-  // wait until auth check finishes
   if (loading) return <p>Loading...</p>;
 
   return (
     <Routes>
-      {/*  Public Route */}
+
+      {/* 🌐 Public Landing Page */}
+      <Route path="/" element={<Landing />} />
+
+      {/* 🔐 Login */}
       <Route
         path="/login"
         element={
-          isAuthenticated ? <Navigate to="/" /> : <Login />
+          isAuthenticated ? <Navigate to="/dashboard" /> : <Login />
         }
       />
 
-      {/* Protected Route */}
+      {/* 🔒 Protected Dashboard */}
       <Route
-        path="/"
+        path="/dashboard"
         element={
           isAuthenticated ? <Home /> : <Navigate to="/login" />
         }
       />
+
     </Routes>
   );
 }
