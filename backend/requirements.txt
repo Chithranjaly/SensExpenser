@@ -4,3 +4,5 @@ environs
 djangorestframework-simplejwt
 django-filter
 django-cors-headers
+pytest
+pytest-django
