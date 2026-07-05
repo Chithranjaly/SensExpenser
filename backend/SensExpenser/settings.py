@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'expenses',
     'django_filters',
     'corsheaders',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 
 ]
 
@@ -128,7 +130,7 @@ STATIC_URL = 'static/'
 
 REST_FRAMEWORK  = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'accounts.authentication.CookieJWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 4,
@@ -140,8 +142,10 @@ REST_FRAMEWORK  = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=300),
-    'REFRESH_TOKEN_LIFETIME' : timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME' : timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
 }
 
 # cookie settings

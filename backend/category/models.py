@@ -14,7 +14,7 @@ class Category(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=["user","category_name"],
-                name='unique_user_category'
+                name="unique_user_category"
             )
         ]
     def __str__(self):
